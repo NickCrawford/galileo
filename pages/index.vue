@@ -8,23 +8,48 @@
         </div>
         <div class="level-right">
           <b-button class="level-item" type="is-info" rounded icon-right="plus"
-            >Add Provider To View</b-button
+            >Add Provider</b-button
           >
         </div>
       </div>
+      <hr />
     </section>
 
     <!-- Providers Container -->
-    <main class="provider-list">
-      <div class="card"></div>
+    <main class="provider-list-container">
+      <div
+        class="provider-list-item card"
+        v-for="provider in selectedProviders"
+        :key="provider.doctor_id"
+      >
+        <div class="card-header">
+          <p>{{ provider }}</p>
+        </div>
+      </div>
     </main>
+
+    <add-provider-modal></add-provider-modal>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import AddProviderModal from '@/components/AddProviderModal.vue'
+
 export default {
   name: 'ProvidersMasterView',
 
-  components: {}
+  components: {
+    AddProviderModal
+  },
+
+  computed: {
+    ...mapGetters(['selectedProviders', 'allProviders'])
+  },
+
+  async fetch({ store }) {
+    console.log('fetching doctors')
+    await store.dispatch('fetchProviders')
+  }
 }
 </script>
