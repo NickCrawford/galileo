@@ -3,7 +3,7 @@ import Vue from 'vue';
 export const state = () => ({
   tasks: {},
   providers: {},
-  selectedProviders: []
+  selectedProviders: ['doctor1']
 })
 
 export const mutations = {

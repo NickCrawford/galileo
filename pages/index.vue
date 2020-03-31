@@ -8,14 +8,15 @@
             <h1 class="level-item title is-3">Provider Task List</h1>
           </div>
           <div class="level-right">
-            <b-button
-              @click="isAddModalActive = true"
-              class="level-item"
-              type="is-info"
-              rounded
-              icon-right="plus"
-              >Add Provider</b-button
-            >
+            <p class="control level-item has-text-centered">
+              <b-button
+                @click="isAddModalActive = true"
+                type="is-info"
+                rounded
+                icon-right="plus"
+                >Add Provider</b-button
+              >
+            </p>
           </div>
         </div>
       </section>
@@ -76,11 +77,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['selectedProviders', 'allProviders'])
+    ...mapGetters(['selectedProviders'])
   },
 
   async fetch({ store }) {
-    console.log('fetching doctors')
     await store.dispatch('fetchProviders')
   }
 }
@@ -91,16 +91,21 @@ export default {
 @import '~bulma/sass/base/_all';
 
 #providers-master-view {
-  height: calc(100% - 3.5rem);
-
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
+
+  height: calc(100% - 3.5rem);
 }
 
 #providers-master-view .container {
   width: 100%;
   border-bottom: 2px solid $light;
+
+  .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
 #providers-master-view .provider-list-wrapper {
@@ -118,14 +123,14 @@ export default {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  align-items: flex-start;
 
   width: auto;
-  max-width: auto;
+  max-width: none;
 
   overflow: visible;
 
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem 1rem;
 
   // Add padding to align with other containers
   @each $size in $desktop, $widescreen, $fullhd {
@@ -139,8 +144,13 @@ export default {
 .provider-list-item {
   display: inline-block;
 
-  min-width: 28rem;
-  max-width: 33vw;
+  min-width: 20rem;
+  max-width: 100%;
+
+  @media screen and (min-width: $tablet) {
+    min-width: 28rem;
+    max-width: 33vw;
+  }
 
   &:not(:last-of-type) {
     margin-right: 1.5rem;
