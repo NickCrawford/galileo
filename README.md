@@ -1,6 +1,7 @@
-# galileo
+# Galileo - Take Home Excercise
 
 > Take home excercise for Galileo front-end engineering role
+> Live demo: [https://hardcore-wright-a34875.netlify.com/](https://hardcore-wright-a34875.netlify.com/)
 
 ## Build Setup
 
