@@ -3,7 +3,7 @@ import Vue from 'vue';
 export const state = () => ({
   tasks: {},
   providers: {},
-  selectedProviders: ['doctor1']
+  selectedProviders: ['doctor1', 'doctor2', 'doctor3', 'doctor4']
 })
 
 export const mutations = {
@@ -26,7 +26,7 @@ export const mutations = {
   },
 
   DESELECT_PROVIDER(state, doctor_id) {
-    let index = state.selectedProviders.findIndex(provider => provider.id == doctor_id)
+    let index = state.selectedProviders.indexOf(doctor_id)
     state.selectedProviders.splice(index, 1)
   }
 }
