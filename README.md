@@ -1,6 +1,7 @@
 # Galileo - Take Home Excercise
 
-> Take home excercise for Galileo front-end engineering role
+> Take home excercise for Galileo front-end engineering role. Built with latest version of NuxtJS, Buefy, and Axios.
+
 > Live demo: [https://hardcore-wright-a34875.netlify.com/](https://hardcore-wright-a34875.netlify.com/)
 
 ## Build Setup
