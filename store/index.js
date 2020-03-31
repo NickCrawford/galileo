@@ -3,7 +3,7 @@ import Vue from 'vue';
 export const state = () => ({
   tasks: {},
   providers: {},
-  selectedProviders: ['doctor1', 'doctor2', 'doctor3', 'doctor4']
+  selectedProviders: []
 })
 
 export const mutations = {
@@ -12,6 +12,13 @@ export const mutations = {
     providerData
   }) {
     Vue.set(state.providers, doctor_id, providerData);
+  },
+
+  SET_PROVIDER_TASKS(state, {
+    doctor_id,
+    taskArray
+  }) {
+    Vue.set(state.providers[doctor_id], 'tasks', taskArray);
   },
 
   SET_TASK(state, {
@@ -71,11 +78,17 @@ export const actions = {
       ...taskData
     }) => {
 
-      commit('SET_PROVIDER', {
-        taskID: task_id,
+      commit('SET_TASK', {
+        task_id,
         taskData
       })
     });
+
+    // Set References to the tasks in the provider object
+    commit('SET_PROVIDER_TASKS', {
+      doctor_id,
+      taskArray: data.map(task => task.task_id)
+    })
   },
 
   // Add or remove a provider from the list of selected providers
@@ -113,5 +126,15 @@ export const getters = {
   selectedProviders: (state) => state.selectedProviders.map(doctor_id => ({
     doctor_id,
     ...state.providers[doctor_id]
-  }))
+  })),
+
+  // Retrieve tasks for a single provider.
+  providerTasks: (state) => (doctor_id) => {
+    if (state.providers[doctor_id] && state.providers[doctor_id].tasks) {
+      return state.providers[doctor_id].tasks.map(task_id => ({
+        task_id,
+        ...state.tasks[task_id]
+      }))
+    }
+  }
 }

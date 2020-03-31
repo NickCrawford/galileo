@@ -32,7 +32,8 @@
     </b-modal>
 
     <!-- Providers Container -->
-    <div class="provider-list-wrapper">
+    <div class="provider-list-wrapper" v-if="selectedProviders.length > 0">
+      <!-- Has Many State -->
       <main class="provider-list-container">
         <provider-list-item
           class="provider-list-item"
@@ -41,6 +42,16 @@
           :provider="provider"
         ></provider-list-item>
       </main>
+    </div>
+    <div class="container" v-else>
+      <!-- Empty State -->
+      <div class="section has-background-light has-text-centered">
+        <p class="title is-4">Nothing here yet!</p>
+        <p class="subtitle is-5">
+          Click the "Add Provider +" button to add providers and view their
+          tasks.
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -116,6 +127,7 @@ export default {
   padding-top: 2rem;
   padding-bottom: 2rem;
 
+  // Add padding to align with other containers
   @each $size in $desktop, $widescreen, $fullhd {
     @media screen and (min-width: $size) {
       padding-left: calc((100% - (#{$size} - #{$gap * 2})) / 2);

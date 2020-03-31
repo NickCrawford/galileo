@@ -21,14 +21,20 @@
         </div>
       </div>
 
-      <div class="content"></div>
+      <provider-task-list :providerID="provider.doctor_id" />
     </div>
   </div>
 </template>
 
 <script>
+import ProviderTaskList from '@/components/ProviderTaskList.vue'
+
 export default {
   name: 'ProviderListItem',
+
+  components: {
+    ProviderTaskList
+  },
 
   props: {
     provider: {
